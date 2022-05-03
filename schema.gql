@@ -1,0 +1,100 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Payment {
+  """Payment ID"""
+  id: Int!
+
+  """Money amount"""
+  amount: Int
+
+  """User payment"""
+  user: User!
+
+  """Created at"""
+  created_at: Timestamp!
+
+  """Updated at"""
+  updated_at: Timestamp!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type User {
+  """User ID"""
+  id: Int!
+
+  """User name"""
+  username: String
+
+  """User balance"""
+  balance: Int
+
+  """User payments"""
+  payments: [Payment!]
+}
+
+input PaymentInput {
+  """Payment ID"""
+  id: Int!
+
+  """Money amount"""
+  amount: Int
+
+  """User payment"""
+  user: UserInput!
+
+  """Created at"""
+  created_at: Timestamp!
+
+  """Updated at"""
+  updated_at: Timestamp!
+}
+
+input UserInput {
+  """User ID"""
+  id: Int!
+
+  """User name"""
+  username: String
+
+  """User balance"""
+  balance: Int
+
+  """User payments"""
+  payments: [PaymentInput!]
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  payment(id: Int!): Payment!
+  payments: [Payment!]!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createPayment(User: UserInput!, createPaymentInput: CreatePaymentInput!): Payment!
+}
+
+input CreateUserInput {
+  """User name"""
+  username: String
+}
+
+input UpdateUserInput {
+  """User name"""
+  username: String
+  id: Int!
+}
+
+input CreatePaymentInput {
+  """Money amount"""
+  amount: Int!
+}
